@@ -9,6 +9,8 @@ USER1_EMAIL="kal@houby.eu"
 
 USER2_NAME="Josef Pepa Muchomurka"
 USER2_EMAIL="josef.p.muchomurka@mushrooms.com"
+USER2_KEY_ID="C231AB0A"
+USER2_KEY_PASSWD="jjoosseeff--mmuuchchoo"
 
 USER3_NAME="Eva Bedlova Zajickova"
 USER3_EMAIL="eva-zajickova@v-hribovem-lesiku.cz"
@@ -47,9 +49,19 @@ function committer() {
 
 function do_commit() {
 	MSG="$1"
+	KEY_PREFIX="$2"
 	echo "Doing commit '$MSG'"
 	git status
-	git commit -m"$MSG"
+	if [ -z "$KEY_PREFIX" ]; then
+		git commit -m"$MSG"
+	else
+		VAR_NAME="${KEY_PREFIX}_ID"
+		eval KEY_ID=\$$VAR_NAME
+		VAR_NAME="${KEY_PREFIX}_PASSWD"
+		eval KEY_PASSWD=\$$VAR_NAME
+		echo "Use this password: '$KEY_PASSWD'"
+		echo "$KEY_PASSWD" | git commit -m"$MSG" --gpg-sign="$KEY_ID"
+	fi
 	echo_sep
 }
 
@@ -226,6 +238,20 @@ git add fl-br1.txt
 author    USER3 '2006-07-29 04:22:11+0000'
 committer USER3 '2006-07-29 04:55:56+0000'
 do_commit "$MSG"
+
+# --------------------------------------------------------------------
+# * back to master and signed commit
+
+MSG="Commit master 010 - signed"
+
+git checkout master
+echo "line 3 of dirA/fileA04-BsY03.txt (was dirB/s-dirY/fileBsY03.txt)" >> dirA/fileA04-BsY03.txt
+git add dirA/fileA04-BsY03.txt
+
+author    USER2 '2006-08-01 15:16:17+0000'
+committer USER2 '2006-08-01 18:19:20+0000'
+do_commit "$MSG" USER2_KEY
+
 
 # --------------------------------------------------------------------
 # Done
