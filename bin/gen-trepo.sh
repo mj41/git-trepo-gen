@@ -213,6 +213,21 @@ committer USER3 '2006-07-28 03:43:26+0000'
 do_commit "$MSG"
 
 # --------------------------------------------------------------------
+# * branch br1,
+
+MSG="Commit br1 009"
+
+git checkout -b br1 HEAD
+
+echo "line 1 of fl-br1.txt" >  fl-br1.txt
+echo "line 2 of fl-br1.txt" >> fl-br1.txt
+git add fl-br1.txt
+
+author    USER3 '2006-07-29 04:22:11+0000'
+committer USER3 '2006-07-29 04:55:56+0000'
+do_commit "$MSG"
+
+# --------------------------------------------------------------------
 # Done
 echo_sep
 echo "Done - see log:"
