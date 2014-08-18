@@ -8,7 +8,7 @@ testing of various tools, e.g.
 * [Git::ClonesManager](https://github.com/mj41/Git-ClonesManager)
 * [Git::Repository::LogRaw](https://github.com/mj41/Git-Repository-LogRaw)
 
-Output of this tools is [git-trep](https://github.com/mj41/git-trepo)
+Output of this tools is [git-trepo](https://github.com/mj41/git-trepo)
 
     git@github.com:mj41/git-trepo.git
 
