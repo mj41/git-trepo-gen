@@ -233,7 +233,7 @@ echo_sep
 echo "Done - see log:"
 echo
 
-git log --pretty=fuller --date-order --reverse --decorat=full --stat --summary
+git log --pretty=fuller --date-order --reverse --decorate=full --stat --summary
 
 # git push -u origin master --force
 
